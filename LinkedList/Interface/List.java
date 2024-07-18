@@ -9,8 +9,8 @@ public interface List<T> {
     boolean remove(T data);
     T removeStart();
     T removeLast();
-    T removeAfter(T after);
-    T removeBefore(T before);
+    T removeAfter(T after) throws Exception;
+    T removeBefore(T before) throws Exception;
     int size();
     boolean isEmpty();
 }

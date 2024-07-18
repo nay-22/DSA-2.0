@@ -3,12 +3,18 @@ package LinkedList;
 import LinkedList.Interface.List;
 
 public class LinkedList<T> implements List<T> {
+    @SuppressWarnings("hiding")
     class Node<T> {
         T data;
         Node<T> prev, next;
 
         public Node(T data) {
             this.data = data;
+        }
+        
+        @Override
+        public String toString() {
+            return "prev = " + prev.data + ", data = " + data + ", next = " + next.data;
         }
     }
 
@@ -102,32 +108,59 @@ public class LinkedList<T> implements List<T> {
 
     @Override
     public boolean remove(T data) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'remove'");
+        Node<T> toRemove = find(data);
+        if (toRemove == null) return false;
+        Node<T> prevNode = toRemove.prev;
+        Node<T> nextNode = toRemove.next;
+        prevNode.next = nextNode;
+        nextNode.prev = prevNode;
+        return true;
+    }
+
+    private T remove(Node<T> toRemove) {
+        Node<T> prevNode = toRemove.prev;
+        Node<T> nextNode = toRemove.next;
+        prevNode.next = nextNode;
+        nextNode.prev = prevNode;
+        return toRemove.data;
     }
 
     @Override
     public T removeStart() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'removeStart'");
+        if(isEmpty()) return null;
+        Node<T> toRemove = head;
+        head = head.next;
+        head.prev = null;
+        return toRemove.data;
     }
 
     @Override
     public T removeLast() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'removeLast'");
+        if (isEmpty()) return null;
+        Node<T> toRemove = tail;
+        tail = tail.prev;
+        tail.next = null;
+        return toRemove.data;
     }
 
     @Override
-    public T removeAfter(T after) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'removeAfter'");
+    public T removeAfter(T after) throws Exception {
+        if (after.equals(tail.data)) return null;
+        Node<T> node = find(after);
+        if (node == null) throw new Exception("Node with given data not found");
+        Node<T> toRemove = node.next;
+        if (toRemove.next == null) return removeLast();
+        return remove(toRemove);
     }
 
     @Override
-    public T removeBefore(T before) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'removeBefore'");
+    public T removeBefore(T before) throws Exception {
+        if (before.equals(head.data)) return null;
+        Node<T> node = find(before);
+        if (node == null) throw new Exception("Node with given data not found");
+        Node<T> toRemove = node.prev;
+        if (toRemove.prev == null) return removeStart();
+        return remove(toRemove);
     }
 
     @Override
