@@ -40,6 +40,7 @@ public class LinkedList<T> implements List<T> {
         }
         Node<T> temp = new Node<>(data);
         tail.next = temp;
+        temp.prev = tail;
         tail = temp;
         size++;
     }
@@ -52,20 +53,48 @@ public class LinkedList<T> implements List<T> {
         }
         Node<T> temp = new Node<>(data);
         temp.next = head;
+        head.prev = temp;
         head = temp;
         size++;
     }
 
-    @Override
-    public void addAfter(T data, T after) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addAfter'");
+    private Node<T> find(T data) {
+        Node<T> ptr = head;
+        while (ptr.next != null) {
+            if (ptr.data.equals(data)) return ptr;
+            ptr = ptr.next;
+        }
+        return null;
     }
 
     @Override
-    public void addBefore(T data, T before) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addBefore'");
+    public void addAfter(T data, T after) throws Exception {
+        if (isEmpty()) {
+            addLast(data);
+            return;
+        }
+        Node<T> node = find(after);
+        if (node == null) throw new Exception("Node with given data not found");
+        Node<T> temp = node.next;
+        node.next = new Node<T>(data);
+        node.next.next = temp;
+    }
+
+    @Override
+    public void addBefore(T data, T before) throws Exception {
+        if (isEmpty()) {
+            addLast(data);
+            return;
+        }
+        Node<T> node = find(before);
+        if (node == null) throw new Exception("Node with given data not found");
+        Node<T> temp = node.prev;
+        Node<T> newNode = new Node<>(data);
+        temp.next = newNode;
+        newNode.prev = temp;
+        newNode.next = node;
+        node.prev = newNode;
+
     }
 
     @Override
