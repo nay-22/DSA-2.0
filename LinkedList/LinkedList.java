@@ -76,8 +76,11 @@ public class LinkedList<T> implements List<T> {
         Node<T> node = find(after);
         if (node == null) throw new Exception("Node with given data not found");
         Node<T> temp = node.next;
-        node.next = new Node<T>(data);
-        node.next.next = temp;
+        Node<T> newNode = new Node<T>(data);
+        node.next = newNode;
+        newNode.prev = node;
+        newNode.next = temp;
+        temp.prev = newNode;
     }
 
     @Override
