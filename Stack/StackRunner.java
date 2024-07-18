@@ -12,10 +12,11 @@ public class StackRunner {
         stack.push(50);
         stack.push(60);
         System.out.println(stack);
-        System.out.println(stack.size());
         stack.pop();
         stack.pop();
         System.out.println(stack);
-        System.out.println(stack.size());
+        stack.push(50);
+        stack.push(60);
+        System.out.println(stack);
     }
 }
