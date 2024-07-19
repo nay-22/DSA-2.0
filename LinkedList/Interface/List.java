@@ -1,6 +1,8 @@
 package LinkedList.Interface;
 
 public interface List<T> {
+    T getHead();
+    T getTail();
     void add(T data);
     void addLast(T data);
     void addStart(T data);

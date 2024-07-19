@@ -28,6 +28,16 @@ public class LinkedList<T> implements List<T> {
         this.tail = null;
     }
 
+    @Override
+    public T getHead() {
+        return head.data;
+    }
+
+    @Override
+    public T getTail() {
+        return tail.data;
+    }
+
     private void addEmpty(T data) {
         head = new Node<T>(data);
         tail = head;
