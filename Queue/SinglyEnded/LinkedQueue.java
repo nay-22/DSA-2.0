@@ -1,55 +1,67 @@
 package Queue.SinglyEnded;
 
+import LinkedList.LinkedList;
+import LinkedList.Interface.List;
 import Queue.Interface.Queue;
 
 public class LinkedQueue<T> implements Queue<T> {
 
+    private List<T> list;
+
+    public LinkedQueue() {
+        this.list = new LinkedList<>();
+    }
+
     @Override
     public void offer(T data) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'offer'");
+        offerLast(data);
     }
 
     @Override
     public void offerLast(T data) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'offerLast'");
+        list.add(data);
     }
 
     @Override
-    public T poll() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'poll'");
+    public T poll() throws Exception {
+        return pollFirst();
     }
 
     @Override
-    public T pollFirst() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'pollFirst'");
+    public T pollFirst() throws Exception {
+        if (list.isEmpty()) throw new Exception("Queue Underflow");
+        return list.removeStart();
     }
 
     @Override
-    public T peek() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'peek'");
+    public T peek() throws Exception {
+        return peekFirst();
     }
 
     @Override
-    public T peekFirst() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'peekFirst'");
+    public T peekFirst() throws Exception {
+        if (list.isEmpty()) throw new Exception("Queue Underflow");
+        return list.getHead();
     }
 
     @Override
     public boolean isEmpty() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isEmpty'");
+        return list.isEmpty();
     }
 
     @Override
     public boolean isFull() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isFull'");
+        throw new UnsupportedOperationException("Memory is the limit");
+    }
+
+    @Override
+    public int size() {
+        return list.size();
+    }
+
+    @Override
+    public String toString() {
+        return list.toString();
     }
 
 }
