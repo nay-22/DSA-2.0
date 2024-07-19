@@ -51,5 +51,11 @@ public class CircularLinkedQueue<T> implements Queue<T> {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'isFull'");
     }
+
+    @Override
+    public int size() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'size'");
+    }
     
 }

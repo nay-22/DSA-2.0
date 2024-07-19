@@ -68,4 +68,10 @@ public class CircularArrayDeque<T> implements Dequeue<T> {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'isFull'");
     }
+
+    @Override
+    public int size() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'size'");
+    }
 }

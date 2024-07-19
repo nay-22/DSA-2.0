@@ -70,4 +70,10 @@ public class ArrayDeque<T> implements Dequeue<T> {
         throw new UnsupportedOperationException("Unimplemented method 'isFull'");
     }
 
+    @Override
+    public int size() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'size'");
+    }
+
 }
