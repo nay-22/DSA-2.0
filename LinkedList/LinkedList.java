@@ -140,7 +140,7 @@ public class LinkedList<T> implements List<T> {
         if(isEmpty()) return null;
         Node<T> toRemove = head;
         head = head.next;
-        head.prev = null;
+        if (head != null) head.prev = null;
         return toRemove.data;
     }
 
