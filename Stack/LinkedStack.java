@@ -1,52 +1,54 @@
 package Stack;
 
+import LinkedList.LinkedList;
+import LinkedList.Interface.List;
 import Stack.Interface.Stack;
 
 
 public class LinkedStack<T> implements Stack<T> {
     
-    // Implement a Linked List first, then use that to simulate stack
+    List<T> stack = new LinkedList<>();
 
     @Override
     public void push(T data) throws Exception {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'push'");
+        stack.addLast(data);
     }
 
     @Override
     public T pop() throws Exception {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'pop'");
+        if (isEmpty()) throw new Exception("Stack Underflow");
+        return stack.removeLast();
     }
 
     @Override
     public T peek() throws Exception {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'peek'");
+        if (isEmpty()) throw new Exception("Stack Underflow");
+        return stack.getTail();
     }
 
     @Override
     public int size() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'size'");
+        return stack.size();
     }
 
     @Override
     public int capacity() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'capacity'");
+        throw new UnsupportedOperationException("Memory is the limit");
     }
 
     @Override
     public boolean isEmpty() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isEmpty'");
+        return stack.isEmpty();
     }
 
     @Override
     public boolean isFull() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isFull'");
+        throw new UnsupportedOperationException("Memory is the limit");
+    }
+
+    @Override
+    public String toString() {
+        return stack.toString();
     }
     
 }
