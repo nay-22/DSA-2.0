@@ -4,40 +4,46 @@ public interface Queue<T> {
     /**
      * Inserts an element at the end of the Queue, makes use of the {@link #offerLast()} method
      * @param data
+     * @throws Exception 
      */
-    void offer(T data);
+    void offer(T data) throws Exception;
 
     /**
      * Inserts an element at the end of the Queue
      * @param data
+     * @throws Exception 
      */
-    void offerLast(T data);
+    void offerLast(T data) throws Exception;
 
     /**
      * Retrive the element at the front from the Queue, while removing it as well, makes use of 
      * the {@link #pollFirst} method
      * @return the front element in the Queue
+     * @throws Exception 
      */
-    T poll();
+    T poll() throws Exception;
 
     /**
      * Retrive the element at the front from the Queue, while removing it as well
      * @return the front element in the Queue
+     * @throws Exception 
      */
-    T pollFirst();
+    T pollFirst() throws Exception;
 
     /**
      * Retrive the element at the front from the Queue, makes use of 
      * the {@link #pollFirst} method
      * @return the front element in the Queue
+     * @throws Exception 
      */
-    T peek();
+    T peek() throws Exception;
 
     /**
      * Retrive the element at the front from the Queue, makes use of 
      * @return the front element in the Queue
+     * @throws Exception 
      */
-    T peekFirst();
+    T peekFirst() throws Exception;
 
     /**
      * Return boolean specifying whether the Queue is Empty or not
@@ -50,4 +56,6 @@ public interface Queue<T> {
      * @return true if Queue is Full, else false
      */
     boolean isFull();
+
+    int size();
 }
