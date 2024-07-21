@@ -6,10 +6,12 @@ import Queue.Interface.Queue;
 import Queue.SinglyEnded.ArrayQueue;
 import Queue.SinglyEnded.LinkedQueue;
 
+@SuppressWarnings("unused")
 public class QueueRunner {
     public static void main(String[] args) throws Exception {
+        // testArrayQueue();
+        testLinkedQueue();
         // testArrayDequeue();
-        testArrayQueue();
     }
 
     private static void testArrayQueue() throws Exception {
@@ -63,6 +65,59 @@ public class QueueRunner {
 
     }
 
+    private static void testLinkedQueue() throws Exception {
+        Queue<Integer> queue = new LinkedQueue<>();
+        queue.offerLast(10);
+        queue.offerLast(20);
+        queue.offerLast(30);
+        System.out.println(queue); // [10, 20, 30]
+
+        
+
+        queue.pollFirst();
+        queue.pollFirst();
+        System.out.println(queue); // [30]
+
+        queue.offer(40);
+        queue.offer(50);
+        queue.offer(60);
+        queue.offer(70);
+        System.out.println(queue);
+        queue.offer(80);
+        System.out.println(queue);
+
+        queue.poll();
+        queue.poll();
+        queue.poll();
+        queue.poll();
+        queue.poll();
+        System.out.println(queue); // [80]
+
+        queue.offer(10);
+        queue.offer(20);
+        queue.offer(30);
+        queue.offer(40);
+        queue.offer(50);
+        queue.offer(60);
+        queue.offer(70);
+        System.out.println(queue); // [80, 10, 20, 30, 40, 50, 60, 70]
+
+        queue.poll();
+        queue.poll();
+        queue.poll();
+        queue.poll();
+        queue.poll();
+        queue.poll();
+        queue.poll();
+        queue.poll();
+        System.out.println(queue); // []
+
+        // Queue Underflow
+        queue.poll();
+
+
+    }
+
     private static void testArrayDequeue() throws Exception {
         Dequeue<Integer> queue = new ArrayDeque<>(7);
         queue.offerLast(10);
@@ -96,6 +151,9 @@ public class QueueRunner {
 
         // throws Exception saying "Front space not available..."
         // queue.offer(20);
-        // System.out.println(queue);
+    }
+
+    private static void testLinkedDequeue() {
+
     }
 }
