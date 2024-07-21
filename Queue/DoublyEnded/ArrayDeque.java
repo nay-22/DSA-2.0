@@ -1,79 +1,52 @@
 package Queue.DoublyEnded;
 
 import Queue.Interface.Dequeue;
+import Queue.SinglyEnded.ArrayQueue;
 
-public class ArrayDeque<T> implements Dequeue<T> {
+public class ArrayDeque<T> extends ArrayQueue<T> implements Dequeue<T> {
 
-    @Override
-    public void offer(T data) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'offer'");
-    }
-
-    @Override
-    public void offerFirst(T data) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'offerFirst'");
-    }
-
-    @Override
-    public void offerLast(T data) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'offerLast'");
-    }
-
-    @Override
-    public T poll() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'poll'");
-    }
-
-    @Override
-    public T pollFirst() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'pollFirst'");
-    }
-
-    @Override
-    public T pollLast() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'pollLast'");
-    }
-
-    @Override
-    public T peek() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'peek'");
-    }
-
-    @Override
-    public T peekFirst() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'peekFirst'");
-    }
-
-    @Override
-    public T peekLast() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'peekLast'");
-    }
-
-    @Override
-    public boolean isEmpty() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isEmpty'");
+    public ArrayDeque(int capacity) {
+        super(capacity);
     }
 
     @Override
     public boolean isFull() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isFull'");
+        return rear == capacity - 1 && front == 0;
     }
 
     @Override
-    public int size() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'size'");
+    public boolean isEmpty() {
+        return rear == -1 || front == -1;
+    }
+
+    @Override
+    public void offerFirst(T data) throws Exception {
+        if (isFull()) throw new Exception("Queue Overflow");
+        if (front == 0) throw new Exception("Front space not available; Try insertion from rear");
+        if (isEmpty()) {
+            front++;
+            rear++;
+            queue[front] = data;
+            return;
+        }
+        queue[--front] = data;
+    }
+
+    @Override
+    public T pollLast() throws Exception {
+        if (isEmpty()) throw new Exception("Queue Underflow");
+        T data = queue[--rear];
+        if (rear < front) {
+            front = -1;
+            rear = -1;
+        }
+        return data;
+    }
+
+    @Override
+    public T peekLast() throws Exception {
+        if (isEmpty()) throw new Exception("Queue Underflow");
+        return queue[rear];
     }
 
 }
