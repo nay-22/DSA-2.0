@@ -4,15 +4,15 @@ import Queue.Interface.Queue;
 
 @SuppressWarnings("unchecked")
 public class ArrayQueue<T> implements Queue<T> {
-    private int rear;
-    private int front;
-    private int capacity;
-    private T[] queue;
+    protected int rear;
+    protected int front;
+    protected int capacity;
+    protected T[] queue;
 
     public ArrayQueue(int capacity) {
         this.rear = -1;
         this.front = -1;
-        this.capacity = 10;
+        this.capacity = capacity;
         this.queue = (T[]) new Object[capacity];
     }
 
@@ -65,7 +65,7 @@ public class ArrayQueue<T> implements Queue<T> {
 
     @Override
     public boolean isFull() {
-        return rear != -1 && front == rear;
+        return rear == capacity - 1;
     }
 
     @Override
@@ -86,5 +86,7 @@ public class ArrayQueue<T> implements Queue<T> {
         str.append("]");
         return str.toString();
     }
+
+    
 
 }
