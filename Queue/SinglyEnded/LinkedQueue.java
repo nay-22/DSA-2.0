@@ -6,7 +6,7 @@ import Queue.Interface.Queue;
 
 public class LinkedQueue<T> implements Queue<T> {
 
-    private List<T> list;
+    protected List<T> list;
 
     public LinkedQueue() {
         this.list = new LinkedList<>();
