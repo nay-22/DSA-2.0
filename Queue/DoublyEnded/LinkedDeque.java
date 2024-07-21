@@ -1,77 +1,25 @@
 package Queue.DoublyEnded;
 
 import Queue.Interface.Dequeue;
+import Queue.SinglyEnded.LinkedQueue;
 
-public class LinkedDeque<T> implements Dequeue<T> {
+public class LinkedDeque<T> extends LinkedQueue<T> implements Dequeue<T> {
+
     @Override
-    public void offer(T data) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'offer'");
+    public void offerFirst(T data) throws Exception {
+        list.addStart(data);
     }
 
     @Override
-    public void offerFirst(T data) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'offerFirst'");
+    public T pollLast() throws Exception {
+        if (isEmpty()) throw new Exception("Queue Underflow");
+        return list.removeLast();
     }
 
     @Override
-    public void offerLast(T data) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'offerLast'");
+    public T peekLast() throws Exception {
+        if (isEmpty()) throw new Exception("Queue Underflow");
+        return list.getTail();
     }
-
-    @Override
-    public T poll() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'poll'");
-    }
-
-    @Override
-    public T pollFirst() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'pollFirst'");
-    }
-
-    @Override
-    public T pollLast() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'pollLast'");
-    }
-
-    @Override
-    public T peek() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'peek'");
-    }
-
-    @Override
-    public T peekFirst() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'peekFirst'");
-    }
-
-    @Override
-    public T peekLast() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'peekLast'");
-    }
-
-    @Override
-    public boolean isEmpty() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isEmpty'");
-    }
-
-    @Override
-    public boolean isFull() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isFull'");
-    }
-
-    @Override
-    public int size() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'size'");
-    }
+    
 }
