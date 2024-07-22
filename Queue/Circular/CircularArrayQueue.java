@@ -73,7 +73,8 @@ public class CircularArrayQueue<T> implements Queue<T> {
 
     @Override
     public int size() {
-        return 0;
+        if (front < rear) return rear - front;
+        return rear + (capacity - front);
     }
 
     @Override
