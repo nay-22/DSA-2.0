@@ -1,7 +1,5 @@
 package Queue.Circular;
 
-import java.util.Arrays;
-
 import Queue.Interface.Queue;
 
 @SuppressWarnings("unchecked")
@@ -80,8 +78,8 @@ public class CircularArrayQueue<T> implements Queue<T> {
 
     @Override
     public String toString() {
-        // System.out.println(front);
-        // System.out.println(rear);
+        // System.out.println("Front = " + front);
+        // System.out.println("Rear = " + rear);
         if (front == -1 || rear == -1) return "[]";
         StringBuilder str = new StringBuilder("[");
         if (front < rear) {
