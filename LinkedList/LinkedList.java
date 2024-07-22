@@ -18,9 +18,9 @@ public class LinkedList<T> implements List<T> {
         }
     }
 
-    private Node<T> head;
-    private Node<T> tail;
-    private int size;
+    protected Node<T> head;
+    protected Node<T> tail;
+    protected int size;
 
     public LinkedList() {
         this.size = 0;
