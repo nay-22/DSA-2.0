@@ -104,6 +104,7 @@ public class CircularLinkedList<T> implements List<T> {
         newNode.prev = node;
         newNode.next = temp;
         temp.prev = newNode;
+        size++;
     }
 
     @Override
@@ -120,7 +121,7 @@ public class CircularLinkedList<T> implements List<T> {
         newNode.prev = temp;
         newNode.next = node;
         node.prev = newNode;
-
+        size++;
     }
 
     @Override
@@ -131,6 +132,7 @@ public class CircularLinkedList<T> implements List<T> {
         Node<T> nextNode = toRemove.next;
         prevNode.next = nextNode;
         nextNode.prev = prevNode;
+        size--;
         return true;
     }
 
@@ -187,6 +189,7 @@ public class CircularLinkedList<T> implements List<T> {
         if (node == null) throw new Exception("Node with given data not found");
         Node<T> toRemove = node.next;
         if (toRemove.next == null) return removeLast();
+        size--;
         return remove(toRemove);
     }
 
@@ -197,6 +200,7 @@ public class CircularLinkedList<T> implements List<T> {
         if (node == null) throw new Exception("Node with given data not found");
         Node<T> toRemove = node.prev;
         if (toRemove.prev == null) return removeStart();
+        size--;
         return remove(toRemove);
     }
 
