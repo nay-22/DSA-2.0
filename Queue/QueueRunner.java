@@ -2,6 +2,8 @@ package Queue;
 
 import Queue.Circular.CircularArrayDeque;
 import Queue.Circular.CircularArrayQueue;
+import Queue.Circular.CircularLinkedDeque;
+import Queue.Circular.CircularLinkedQueue;
 import Queue.DoublyEnded.ArrayDeque;
 import Queue.DoublyEnded.LinkedDeque;
 import Queue.Interface.Dequeue;
@@ -17,7 +19,9 @@ public class QueueRunner {
         // testArrayDequeue();
         // testLinkedDequeue();
         // testCircularArrayQueue();
-        testCircularArrayDequeue();
+        // testCircularArrayDequeue();
+        // testCircularLinkedQueue();
+        testCircularLinkedDequeue();
     }
 
     private static void testArrayQueue() throws Exception {
@@ -429,6 +433,174 @@ public class QueueRunner {
 
         // Actual internal queue => [null, null, null, null, null, null, null]
         System.out.println(queue.internal());
+        System.out.println(queue); // []
+
+        // Queue Underflow
+        queue.pollLast();
+
+    }
+
+    private static void testCircularLinkedQueue() throws Exception {
+
+        CircularLinkedQueue<Integer> queue = new CircularLinkedQueue<>(); // Access internal() method
+
+        System.out.println(queue.isEmpty());
+
+        queue.offer(10);
+        System.out.println(queue); // [10]
+        queue.offer(20);
+        queue.offer(30);
+        queue.offer(40);
+        queue.offer(50);
+        queue.offer(60);
+        queue.offer(70);
+        System.out.println(queue); // [10, 20, 30, 40, 50, 60, 70]
+
+        queue.poll();
+        queue.poll();
+        queue.poll();
+        System.out.println(queue); // [40, 50, 60, 70]
+
+        queue.offer(80);
+        queue.offer(90);
+        queue.offer(100);
+
+        System.out.println(queue); // [40, 50, 60, 70, 80, 90, 100]
+
+
+        queue.poll();
+        queue.poll();
+
+        System.out.println(queue); // [60, 70, 80, 90, 100]
+
+        queue.offer(110);
+        queue.poll();
+        queue.poll();
+
+        System.out.println(queue); // [80, 90, 100, 110]
+
+        queue.poll();
+
+        System.out.println(queue); // [90, 100, 110]
+
+        queue.poll();
+        System.out.println(queue); // [100, 110]
+
+        queue.poll();
+        System.out.println(queue); // [110]
+
+        queue.poll();
+        System.out.println(queue); // []
+
+        queue.offer(10);
+        queue.offer(20);
+        queue.offer(30);
+        queue.offer(40);
+
+        System.out.println(queue); // [10, 20, 30, 40]
+    }
+
+    private static void testCircularLinkedDequeue() throws Exception {
+        CircularLinkedDeque<Integer> queue = new CircularLinkedDeque<>();
+        queue.offer(10);
+        queue.offer(20);
+        queue.offer(30);
+        queue.offer(40);
+        queue.offer(50);
+        queue.offer(60);
+        queue.offer(70);
+        System.out.println(queue); // [10, 20, 30, 40, 50, 60, 70]
+
+        queue.poll();
+        queue.poll();
+        queue.poll();
+        System.out.println(queue); // [40, 50, 60, 70]
+
+        queue.offer(80);
+        queue.offer(90);
+        queue.offer(100);
+
+        System.out.println(queue); // [40, 50, 60, 70, 80, 90, 100]
+
+
+        queue.poll();
+        queue.poll();
+
+        System.out.println(queue); // [60, 70, 80, 90, 100]
+
+        queue.offer(110);
+        queue.poll();
+        queue.poll();
+
+        System.out.println(queue); // [80, 90, 100, 110]
+
+        queue.poll();
+
+        System.out.println(queue); // [90, 100, 110]
+
+        queue.poll();
+        queue.poll();
+        queue.poll();
+
+        System.out.println(queue); // []
+
+        queue.offer(10);
+        queue.offer(20);
+        queue.offer(30);
+        queue.offer(40);
+        queue.offer(50);
+        queue.offer(60);
+
+        System.out.println(queue); // [10, 20, 30, 40, 50, 60]
+
+        System.out.println("peekLast() => " + queue.peekLast()); // 60
+
+        queue.poll();
+        queue.poll();
+        queue.poll();
+
+        System.out.println(queue); // [40, 50, 60]
+
+        queue.offerFirst(70);
+        queue.offerFirst(80);
+
+        System.out.println(queue); // [80, 70, 40, 50, 60]
+
+        queue.offerFirst(90);
+
+        System.out.println(queue); // [90, 80, 70, 40, 50, 60]
+
+        queue.offerFirst(100);
+
+        System.out.println(queue); // [100, 90, 80, 70, 40, 50, 60]
+
+        queue.pollLast();
+        queue.pollLast();
+
+        System.out.println(queue); // [100, 90, 80, 70, 40]
+
+        queue.offerFirst(110);
+        queue.offerFirst(120);
+
+        System.out.println(queue); // [120, 110, 100, 90, 80, 70, 40]
+
+        queue.pollLast();
+        queue.pollLast();
+
+        System.out.println(queue); // [120, 110, 100, 90, 80]
+
+        queue.pollLast();
+        queue.pollLast();
+
+        System.out.println(queue); // [120, 110, 100]
+
+        queue.pollLast();
+        queue.pollLast();
+
+        System.out.println(queue); // [120]
+
+        queue.pollLast();
+
         System.out.println(queue); // []
 
         // Queue Underflow
