@@ -1,5 +1,6 @@
 package Queue;
 
+import Queue.Circular.CircularArrayDeque;
 import Queue.Circular.CircularArrayQueue;
 import Queue.DoublyEnded.ArrayDeque;
 import Queue.DoublyEnded.LinkedDeque;
@@ -15,7 +16,8 @@ public class QueueRunner {
         // testLinkedQueue();
         // testArrayDequeue();
         // testLinkedDequeue();
-        testCircularArrayQueue();
+        // testCircularArrayQueue();
+        testCircularArrayDequeue();
     }
 
     private static void testArrayQueue() throws Exception {
@@ -24,8 +26,6 @@ public class QueueRunner {
         queue.offerLast(20);
         queue.offerLast(30);
         System.out.println(queue); // [10, 20, 30]
-
-        
 
         queue.pollFirst();
         queue.pollFirst();
@@ -45,7 +45,8 @@ public class QueueRunner {
         queue.poll();
         queue.poll();
         queue.poll();
-        queue.poll(); // polling of the only element resets the front and rear to free all spaces upto capacity
+        queue.poll(); // polling of the only element resets the front and rear to free all spaces upto
+                      // capacity
         System.out.println(queue); // [], front = -1, rear = -1
 
         queue.offer(10);
@@ -75,8 +76,6 @@ public class QueueRunner {
         queue.offerLast(20);
         queue.offerLast(30);
         System.out.println(queue); // [10, 20, 30]
-
-        
 
         queue.pollFirst();
         queue.pollFirst();
@@ -162,8 +161,6 @@ public class QueueRunner {
         queue.offerLast(30);
         System.out.println(queue); // [10, 20, 30]
 
-        
-
         queue.pollFirst();
         queue.pollFirst();
         System.out.println(queue); // [30]
@@ -174,7 +171,7 @@ public class QueueRunner {
         queue.offer(70);
         System.out.println(queue); // [30, 40, 50, 60, 70]
 
-        queue.offer(80); 
+        queue.offer(80);
         System.out.println(queue); // [30, 40, 50, 60, 70]
 
         queue.poll();
@@ -219,7 +216,8 @@ public class QueueRunner {
     }
 
     private static void testCircularArrayQueue() throws Exception {
-        // Queue<Integer> queue = new CircularArrayQueue<>(7); // No access to internal() method
+        // Queue<Integer> queue = new CircularArrayQueue<>(7); // No access to
+        // internal() method
         CircularArrayQueue<Integer> queue = new CircularArrayQueue<>(7); // Access internal() method
         queue.offer(10);
         queue.offer(20);
@@ -270,11 +268,10 @@ public class QueueRunner {
         System.out.println(queue.internal());
         System.out.println(queue); // [90, 100, 110]
 
+        queue.poll();
+        queue.poll();
+        queue.poll();
 
-        queue.poll();
-        queue.poll();
-        queue.poll();
-        
         // Actual internal queue => [null, null, null, null, null, null, null]
         System.out.println(queue.internal());
         System.out.println(queue); // []
@@ -287,5 +284,155 @@ public class QueueRunner {
         // Actual internal queue => [null, null, null, null, null, null, null]
         System.out.println(queue.internal());
         System.out.println(queue); // []
+    }
+
+    private static void testCircularArrayDequeue() throws Exception {
+        // Dequeue<Integer> queue = new CircularArrayDeque<>(7); // No access to
+        // internal() method
+        CircularArrayDeque<Integer> queue = new CircularArrayDeque<>(7); // Access internal() method
+        queue.offer(10);
+        queue.offer(20);
+        queue.offer(30);
+        queue.offer(40);
+        queue.offer(50);
+        queue.offer(60);
+        queue.offer(70);
+        System.out.println(queue); // [10, 20, 30, 40, 50, 60, 70]
+
+        // Queue Overflow
+        // queue.offer(80);
+
+        queue.poll();
+        queue.poll();
+        queue.poll();
+        System.out.println(queue); // [40, 50, 60, 70]
+
+        queue.offer(80);
+        queue.offer(90);
+        queue.offer(100);
+
+        // Actual internal queue => // [80, 90, 100, 40, 50, 60, 70]
+        System.out.println(queue.internal());
+        System.out.println(queue); // [40, 50, 60, 70, 80, 90, 100]
+
+        // Queue Overflow
+        // queue.offer(110);
+
+        queue.poll();
+        queue.poll();
+
+        // Actual internal queue => [80, 90, 100, null, null, 60, 70]
+        System.out.println(queue.internal());
+        System.out.println(queue); // [60, 70, 80, 90, 100]
+
+        queue.offer(110);
+        queue.poll();
+        queue.poll();
+
+        // Actual internal queue => [80, 90, 100, 110, null, null, null]
+        System.out.println(queue.internal());
+        System.out.println(queue); // [80, 90, 100, 110]
+
+        queue.poll();
+
+        // Actual internal queue => [null, 90, 100, 110, null, null, null]
+        System.out.println(queue.internal());
+        System.out.println(queue); // [90, 100, 110]
+
+        queue.poll();
+        queue.poll();
+        queue.poll();
+
+        // Actual internal queue => [null, null, null, null, null, null, null]
+        System.out.println(queue.internal());
+        System.out.println(queue); // []
+
+        queue.offer(10);
+        queue.offer(20);
+        queue.offer(30);
+        queue.offer(40);
+        queue.offer(50);
+        queue.offer(60);
+
+        // Actual internal queue => [10, 20, 30, 40, 50, 60, null]
+        System.out.println(queue.internal());
+        System.out.println(queue); // [10, 20, 30, 40, 50, 60]
+
+        System.out.println("peekLast() => " + queue.peekLast()); // 60
+
+        queue.poll();
+        queue.poll();
+        queue.poll();
+
+        // Actual internal queue => [null, null, null, 40, 50, 60, null]
+        System.out.println(queue.internal());
+        System.out.println(queue); // [40, 50, 60]
+
+        queue.offerFirst(70);
+        queue.offerFirst(80);
+
+        // Actual internal queue => [null, 80, 70, 40, 50, 60, null]
+        System.out.println(queue.internal());
+        System.out.println(queue); // [80, 70, 40, 50, 60]
+
+        queue.offerFirst(90);
+
+        // Actual internal queue => [90, 80, 70, 40, 50, 60, null]
+        System.out.println(queue.internal());
+        System.out.println(queue); // [90, 80, 70, 40, 50, 60]
+
+        queue.offerFirst(100);
+
+        // Actual internal queue => [90, 80, 70, 40, 50, 60, 100]
+        System.out.println(queue.internal());
+        System.out.println(queue); // [100, 90, 80, 70, 40, 50, 60]
+
+        // Queue Overflow
+        // queue.offerFirst(110);
+
+        queue.pollLast();
+        queue.pollLast();
+
+        // Actual internal queue => [90, 80, 70, 40, null, null, 100]
+        System.out.println(queue.internal());
+        System.out.println(queue); // [100, 90, 80, 70, 40]
+
+        queue.offerFirst(110);
+        queue.offerFirst(120);
+
+        // Actual internal queue => [90, 80, 70, 40, 120, 110, 100]
+        System.out.println(queue.internal());
+        System.out.println(queue); // [120, 110, 100, 90, 80, 70, 40]
+
+        queue.pollLast();
+        queue.pollLast();
+
+        // Actual internal queue => [90, 80, null, null, 120, 110, 100]
+        System.out.println(queue.internal());
+        System.out.println(queue); // [120, 110, 100, 90, 80]
+
+        queue.pollLast();
+        queue.pollLast();
+
+        // Actual internal queue => [null, null, null, null, 120, 110, 100]
+        System.out.println(queue.internal());
+        System.out.println(queue); // [120, 110, 100]
+
+        queue.pollLast();
+        queue.pollLast();
+
+        // Actual internal queue => [null, null, null, null, 120, null, null]
+        System.out.println(queue.internal());
+        System.out.println(queue); // [120]
+
+        queue.pollLast();
+
+        // Actual internal queue => [null, null, null, null, null, null, null]
+        System.out.println(queue.internal());
+        System.out.println(queue); // []
+
+        // Queue Underflow
+        queue.pollLast();
+
     }
 }
