@@ -41,6 +41,7 @@ public class LinkedList<T> implements List<T> {
     private void addEmpty(T data) {
         head = new Node<T>(data);
         tail = head;
+        size += 1;
     }
 
     @Override
@@ -58,7 +59,7 @@ public class LinkedList<T> implements List<T> {
         tail.next = temp;
         temp.prev = tail;
         tail = temp;
-        size++;
+        size += 1;
     }
 
     @Override
@@ -71,7 +72,7 @@ public class LinkedList<T> implements List<T> {
         temp.next = head;
         head.prev = temp;
         head = temp;
-        size++;
+        size += 1;
     }
 
     private Node<T> find(T data) {
@@ -97,7 +98,7 @@ public class LinkedList<T> implements List<T> {
         newNode.prev = node;
         newNode.next = temp;
         temp.prev = newNode;
-        size++;
+        size += 1;
     }
 
     @Override
@@ -114,7 +115,7 @@ public class LinkedList<T> implements List<T> {
         newNode.prev = temp;
         newNode.next = node;
         node.prev = newNode;
-        size++;
+        size += 1;
     }
 
     @Override
@@ -125,7 +126,7 @@ public class LinkedList<T> implements List<T> {
         Node<T> nextNode = toRemove.next;
         prevNode.next = nextNode;
         nextNode.prev = prevNode;
-        size--;
+        size -= 1;
         return true;
     }
 
@@ -143,7 +144,7 @@ public class LinkedList<T> implements List<T> {
         Node<T> toRemove = head;
         head = head.next;
         if (head != null) head.prev = null;
-        size--;
+        size -= 1;
         return toRemove.data;
     }
 
@@ -153,7 +154,7 @@ public class LinkedList<T> implements List<T> {
         Node<T> toRemove = tail;
         tail = tail.prev;
         tail.next = null;
-        size--;
+        size -= 1;
         return toRemove.data;
     }
 
@@ -164,7 +165,7 @@ public class LinkedList<T> implements List<T> {
         if (node == null) throw new Exception("Node with given data not found");
         Node<T> toRemove = node.next;
         if (toRemove.next == null) return removeLast();
-        size--;
+        size -= 1;
         return remove(toRemove);
     }
 
@@ -175,7 +176,7 @@ public class LinkedList<T> implements List<T> {
         if (node == null) throw new Exception("Node with given data not found");
         Node<T> toRemove = node.prev;
         if (toRemove.prev == null) return removeStart();
-        size--;
+        size -= 1;
         return remove(toRemove);
     }
 

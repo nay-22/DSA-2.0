@@ -13,6 +13,7 @@ public class LinkedListRunner {
         list.add(60);
         list.add(70);
         System.out.println(list);
+        System.out.println(list.size());
         list.removeStart();
         System.out.println(list);
         list.removeStart();
